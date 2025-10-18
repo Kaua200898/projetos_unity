@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public float MoveSpeed;
     private Rigidbody2D rb;
+
+    public int Life;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

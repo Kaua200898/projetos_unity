@@ -23,7 +23,7 @@ public class EnemyController : MonoBehaviour
     void ChasePlayer()
     {
         float MoveX, MoveY;
-        
+
         if (Enemy.position.x < Target.position.x)
         {
             MoveX = 1;
@@ -39,5 +39,13 @@ public class EnemyController : MonoBehaviour
         Vector2 Direction = new Vector2(MoveX, MoveY);
         rb.velocity = MoveSpeed * Direction.normalized;
 
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            collision.GetComponentInParent<PlayerController>().Life--;
+        }
     }
 }

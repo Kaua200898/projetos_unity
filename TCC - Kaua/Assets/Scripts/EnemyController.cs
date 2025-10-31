@@ -6,12 +6,14 @@ public class EnemyController : MonoBehaviour
 {
     public float MoveSpeed; 
     private Rigidbody2D rb;
+    private Animator anim;
 
     public Transform Enemy;
     public Transform Target;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -41,11 +43,19 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponentInParent<PlayerController>().Life--;
+            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "SimpleShot")
+        {
+            Destroy(this.gameObject);
         }
     }
 }

@@ -33,7 +33,10 @@ public class Shot : MonoBehaviour
         }
         else if (collision.tag == "Enemy")
         {
-            Destroy(this.gameObject);
+            if (this.gameObject.tag == "SimpleShot")
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 }

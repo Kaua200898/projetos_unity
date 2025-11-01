@@ -5,6 +5,7 @@ using UnityEngine;
 public class StatueController : MonoBehaviour
 {
     private bool PlayerDetected = false;
+    public bool PlayerHasBeenDetected = false;
     private Animator anim;
 
     public Transform []Spawners;
@@ -18,12 +19,17 @@ public class StatueController : MonoBehaviour
     void Update()
     {
         anim.SetBool("PlayerDetected", PlayerDetected);
+
         Spawner();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        PlayerDetected = true;
+        if (collision.tag == "Player" && PlayerHasBeenDetected == false)
+        {
+            PlayerDetected = true;
+            PlayerHasBeenDetected = true;
+        }
     }
 
     void Spawner()

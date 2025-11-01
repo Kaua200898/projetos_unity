@@ -10,10 +10,13 @@ public class EnemyController : MonoBehaviour
 
     public Transform Enemy;
     public Transform Target;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
 

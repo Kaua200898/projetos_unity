@@ -9,6 +9,7 @@ TagManager:
   - BlockedWarp
   - Warp
   - Statue
+  - Spawner
   layers:
   - Default
   - TransparentFX

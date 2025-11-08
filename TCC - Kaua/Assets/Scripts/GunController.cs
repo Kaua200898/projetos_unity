@@ -20,7 +20,7 @@ public class GunController : MonoBehaviour
 
     void Start()
     {
-        
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame

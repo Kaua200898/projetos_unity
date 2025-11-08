@@ -8,11 +8,14 @@ public class StatueController : MonoBehaviour
     public bool PlayerHasBeenDetected = false;
     private Animator anim;
 
-    public Transform []Spawners;
-    public GameObject []Enemies;     
+    public GameObject []Spawners;
+    public GameObject []Enemies;
+
     void Start()
     {
         anim = GetComponent<Animator>();
+
+        Spawners = GameObject.FindGameObjectsWithTag("Spawner");
     }
 
     // Update is called once per frame
@@ -36,9 +39,12 @@ public class StatueController : MonoBehaviour
     {
         if (PlayerDetected)
         {
-            Instantiate(Enemies[Random.Range(0, 1)], Spawners[0].position, Quaternion.identity);
-            Instantiate(Enemies[Random.Range(0, 1)], Spawners[1].position, Quaternion.identity);
-            Instantiate(Enemies[Random.Range(0, 1)], Spawners[2].position, Quaternion.identity);
+            for(int i = 0; i < Spawners.Length; i++)
+            {
+                Instantiate(Enemies[Random.Range(0, Enemies.Length)], Spawners[i].transform.position, Quaternion.identity);
+            }
+
+
             PlayerDetected = false;
         }
     }

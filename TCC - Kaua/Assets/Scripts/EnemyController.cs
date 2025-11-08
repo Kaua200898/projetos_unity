@@ -16,6 +16,8 @@ public class EnemyController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        MoveSpeed = Random.Range(2, 3);
+
         Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 

@@ -8,6 +8,8 @@ public class WarpController : MonoBehaviour
     public GameObject Statue;
     public bool IsOpen = false;
 
+    public string StageName;
+
 
     void Start()
     {
@@ -26,7 +28,6 @@ public class WarpController : MonoBehaviour
 
                 if (IsOpen)
                 {
-                    Debug.Log("Abrir");
                     Destroy(this.gameObject);
                 }
 
@@ -36,6 +37,15 @@ public class WarpController : MonoBehaviour
                    
                 }
             }
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player" && tag == "Warp")
+        {
+            SceneManager.LoadScene(StageName);
         }
     }
 }

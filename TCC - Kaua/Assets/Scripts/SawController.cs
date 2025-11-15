@@ -13,8 +13,11 @@ public class SawController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        MoveX = Random.Range(1, -1);
-        MoveY = Random.Range(1, -1);
+        float[] MoveNumbers = {-1 , 1};
+        int RandomNumber = Random.Range(0, MoveNumbers.Length);
+
+        MoveX = MoveNumbers[RandomNumber];
+        MoveY = MoveNumbers[RandomNumber];
     }
 
     
@@ -27,5 +30,13 @@ public class SawController : MonoBehaviour
     {
         Vector2 Direction = new Vector2(MoveX, MoveY);
         rb.velocity = SawSpeed * Direction.normalized;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
+        }
     }
 }

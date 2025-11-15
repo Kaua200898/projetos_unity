@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -11,6 +12,10 @@ public class EnemyController : MonoBehaviour
     public Transform Enemy;
     public Transform Target;
 
+    public string EnemyType;
+
+    public GameObject Saw;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -18,6 +23,7 @@ public class EnemyController : MonoBehaviour
 
         MoveSpeed = Random.Range(2, 3);
 
+        Enemy = this.gameObject.transform;
         Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -26,6 +32,7 @@ public class EnemyController : MonoBehaviour
     {
         ChasePlayer();
     }
+
 
     void ChasePlayer()
     {
@@ -48,9 +55,26 @@ public class EnemyController : MonoBehaviour
 
     }
 
+    void Transforming()
+    {
+        if (EnemyType == "Enemy3")
+        {
+            MoveSpeed = 0;
+            bool PlayerIsInRange = true;
+            anim.SetBool("PlayerDetected", PlayerIsInRange);
+            Invoke("TurnIntoASaw", 2);
+        }
+    }
+
+    void TurnIntoASaw()
+    {
+        Instantiate(Saw, Enemy.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && EnemyType != "Enemy3")
         {
             collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
         }
@@ -58,9 +82,17 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "SimpleShot")
+        if (collision.tag == "SimpleShot" && EnemyType != "Enemy3")
         {
             Destroy(this.gameObject);
         }
+        else
+        {
+            if (collision.tag == "Player" && EnemyType == "Enemy3")
+            {
+                Transforming();
+            }
+        }
+
     }
 }

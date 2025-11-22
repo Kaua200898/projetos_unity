@@ -38,5 +38,6 @@ public class Shot : MonoBehaviour
                     Destroy(this.gameObject);
                 }
         }
+
     }
 }

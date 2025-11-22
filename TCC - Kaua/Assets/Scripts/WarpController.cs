@@ -10,7 +10,6 @@ public class WarpController : MonoBehaviour
 
     public string StageName;
 
-
     void Start()
     {
         Statue = GameObject.FindGameObjectWithTag("Statue");
@@ -39,11 +38,24 @@ public class WarpController : MonoBehaviour
             }
         }
 
+        if (tag == "Warp")
+        {
+            if (Statue.GetComponentInParent<StatueController>().PlayerHasBeenDetected)
+            {
+                GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+                if (Enemies.Length == 0)
+                {
+                    IsOpen = true;
+
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && tag == "Warp")
+        if (collision.tag == "Player" && tag == "Warp" && IsOpen == true)
         {
             SceneManager.LoadScene(StageName);
         }

@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     public string EnemyType;
 
     public GameObject Saw;
+    private bool SawInvoked;
 
     void Start()
     {
@@ -62,13 +63,14 @@ public class EnemyController : MonoBehaviour
             MoveSpeed = 0;
             bool PlayerIsInRange = true;
             anim.SetBool("PlayerDetected", PlayerIsInRange);
-            Invoke("TurnIntoASaw", 2);
+            Invoke("TurnIntoASaw", 1);
         }
     }
 
     void TurnIntoASaw()
     {
-        Instantiate(Saw, Enemy.transform.position, Quaternion.identity);
+        if (SawInvoked == false) { Instantiate(Saw, Enemy.transform.position, Quaternion.identity); }
+        SawInvoked = true;
         Destroy(this.gameObject);
     }
 

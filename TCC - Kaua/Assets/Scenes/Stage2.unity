@@ -364,7 +364,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Statue: {fileID: 0}
   IsOpen: 0
-  StageName: Stage1
+  StageName: Stage3
 --- !u!19719996 &77190219
 TilemapCollider2D:
   m_ObjectHideFlags: 0

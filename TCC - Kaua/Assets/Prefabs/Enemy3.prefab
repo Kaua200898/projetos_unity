@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 347998999350348578}
   - component: {fileID: 1461156187368875195}
   - component: {fileID: 2904741732078341696}
+  - component: {fileID: 6253784344393616538}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -188,3 +189,38 @@ CircleCollider2D:
   m_Offset: {x: 0, y: -0.18994737}
   serializedVersion: 2
   m_Radius: 3
+--- !u!58 &6253784344393616538
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984993879474534239}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: -0.2}
+  serializedVersion: 2
+  m_Radius: 0.36

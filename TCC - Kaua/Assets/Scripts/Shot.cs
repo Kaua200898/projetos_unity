@@ -23,11 +23,11 @@ public class Shot : MonoBehaviour
         {
             if (this.gameObject.tag != "SimpleShot")
             {
-                collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
                 if (collision.GetComponentInParent<PlayerController>().CanTakeDamage)
                 {
                     Destroy(this.gameObject);
                 }
+                collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
             }
         
         }
@@ -36,6 +36,7 @@ public class Shot : MonoBehaviour
                 if (this.gameObject.tag == "SimpleShot")
                 {
                     Destroy(this.gameObject);
+
                 }
         }
 

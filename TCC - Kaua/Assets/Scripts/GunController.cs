@@ -6,6 +6,7 @@ public class GunController : MonoBehaviour
 {
     public Transform Target;
     private Vector2 TargetPosition;
+    private bool PlayerOnRange = false;
     private Vector2 GunDirection;
 
     private float Angle;
@@ -27,9 +28,8 @@ public class GunController : MonoBehaviour
     void Update()
     {
         TargetPosition = new Vector2(Target.transform.position.x, Target.transform.position.y);
-        Shooting();
 
-
+        if (PlayerOnRange) { Shooting(); }
     }
 
     private void FixedUpdate()
@@ -41,6 +41,8 @@ public class GunController : MonoBehaviour
 
     void Shooting()
     {
+
+
         GunCooldown -= Time.deltaTime;
         if (GunCooldown <= 0 && CanShoot == false)
         {
@@ -53,5 +55,16 @@ public class GunController : MonoBehaviour
             Instantiate(Shot, FirePoint.position, FirePoint.rotation);
             CanShoot = false;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player") PlayerOnRange = true;
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == "Player") 
+            PlayerOnRange = false;
     }
 }

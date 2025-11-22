@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5786893089771697885}
   - component: {fileID: 347998999350348578}
   - component: {fileID: 5599937051210650191}
-  - component: {fileID: 2904741732078341696}
+  - component: {fileID: 8994754936276400332}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -176,7 +176,9 @@ MonoBehaviour:
   MoveSpeed: 2
   Enemy: {fileID: 8981343119786576408}
   Target: {fileID: 0}
+  HaveGun: 0
   EnemyType: Enemy1
+  Saw: {fileID: 0}
 --- !u!95 &5599937051210650191
 Animator:
   serializedVersion: 5
@@ -198,7 +200,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!58 &2904741732078341696
+--- !u!58 &8994754936276400332
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -230,6 +232,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.18994737}
+  m_Offset: {x: 0, y: -0.18618512}
   serializedVersion: 2
-  m_Radius: 0.31005263
+  m_Radius: 0.31381488

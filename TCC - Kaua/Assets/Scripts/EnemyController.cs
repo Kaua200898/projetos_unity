@@ -11,6 +11,7 @@ public class EnemyController : MonoBehaviour
 
     public Transform Enemy;
     public Transform Target;
+    public bool HaveGun;
 
     public string EnemyType;
 
@@ -54,6 +55,11 @@ public class EnemyController : MonoBehaviour
         Vector2 Direction = new Vector2(MoveX, MoveY);
         rb.velocity = MoveSpeed * Direction.normalized;
 
+        if (EnemyType == "Enemy2")
+        {
+            HaveGun = true;
+        }
+
     }
 
     void Transforming()
@@ -76,9 +82,10 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && EnemyType != "Enemy3")
+        if (collision.tag == "Player" && EnemyType != "Enemy3" && !HaveGun)
         {
             collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
+            Debug.Log("Tomei dano");
         }
     }
 

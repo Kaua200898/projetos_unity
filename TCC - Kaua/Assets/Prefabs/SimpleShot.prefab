@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2224899237750582621}
   - component: {fileID: 4296225785058182421}
   - component: {fileID: 1752782182022652336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SimpleShot
   m_TagString: SimpleShot
   m_Icon: {fileID: 0}

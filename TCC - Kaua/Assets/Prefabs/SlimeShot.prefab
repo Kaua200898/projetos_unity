@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShotSpeed: 7
-  DestroyIn: 3
+  DestroyIn: 1.5
 --- !u!50 &6753046739495219624
 Rigidbody2D:
   serializedVersion: 4

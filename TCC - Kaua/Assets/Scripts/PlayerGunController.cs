@@ -13,11 +13,14 @@ public class PlayerGunController : MonoBehaviour
 
     public SpriteRenderer GunSprite;
 
-    public float GunCooldown = 1.5f;
+    public float GunCooldown;
     private bool CanShoot = true;
 
     public Transform FirePoint;
     public GameObject Shot;
+
+    public string GunType;
+    public Sprite[] GunTypeImage;
 
     void Start()
     {
@@ -49,12 +52,37 @@ public class PlayerGunController : MonoBehaviour
 
     void Shoot()
     {
-        if (Input.GetMouseButtonDown(0) && CanShoot == true)
-        {
-            CanShoot = false;
-            Instantiate(Shot, FirePoint.position, FirePoint.rotation);
-            Invoke("CD", GunCooldown);
+        GunBehaviour();
+    }
 
+    void GunBehaviour()
+    { 
+        if (GunType == "Pistol")
+        {
+            GunCooldown = 0.3f;
+            GunSprite.sprite = GunTypeImage[0];
+
+            if (Input.GetMouseButtonDown(0) && CanShoot == true)
+            {
+                CanShoot = false;
+                Instantiate(Shot, FirePoint.position, FirePoint.rotation);
+                Invoke("CD", GunCooldown);
+
+            }
+        }
+
+        if (GunType == "Uzi")
+        {
+            GunCooldown = 0.1f;
+            GunSprite.sprite = GunTypeImage[1];
+
+            if (Input.GetMouseButton(0) && CanShoot == true)
+            {
+                CanShoot = false;
+                Instantiate(Shot, FirePoint.position, FirePoint.rotation);
+                Invoke("CD", GunCooldown);
+
+            }
         }
     }
     void CD()

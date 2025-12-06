@@ -59,7 +59,7 @@ public class SawController : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
+            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer(3);
         }
     }
 }

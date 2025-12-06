@@ -9,7 +9,7 @@ public class StatueController : MonoBehaviour
     private Animator anim;
 
     public GameObject []Spawners;
-    public GameObject []Enemies;
+    public GameObject SpawnerBlink;
 
     void Start()
     {
@@ -41,7 +41,7 @@ public class StatueController : MonoBehaviour
         {
             for(int i = 0; i < Spawners.Length; i++)
             {
-                Instantiate(Enemies[Random.Range(0, Enemies.Length)], Spawners[i].transform.position, Quaternion.identity);
+                Instantiate(SpawnerBlink, Spawners[i].transform.position, Quaternion.identity);
             }
 
 

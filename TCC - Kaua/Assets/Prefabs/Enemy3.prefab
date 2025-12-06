@@ -132,6 +132,8 @@ MonoBehaviour:
   Enemy: {fileID: 8981343119786576408}
   Target: {fileID: 0}
   EnemyType: Enemy3
+  HaveGun: 0
+  EnemyLife: 0
   Saw: {fileID: 6969371461060388311, guid: a4f4d626c9ab7a841956190b3eb1fd94, type: 3}
 --- !u!95 &1461156187368875195
 Animator:
@@ -204,7 +206,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -221,6 +223,6 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.2}
+  m_Offset: {x: 0, y: -0.15}
   serializedVersion: 2
-  m_Radius: 0.36
+  m_Radius: 0.31

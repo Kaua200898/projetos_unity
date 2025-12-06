@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 1381222600379900710}
   - component: {fileID: 6249580929409415947}
   - component: {fileID: 1681355821225118313}
-  - component: {fileID: 1213438602249573960}
+  - component: {fileID: 2044850941279088993}
   - component: {fileID: 8592177407313788056}
   - component: {fileID: 368518980372598706}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy2
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -116,8 +116,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &1213438602249573960
-BoxCollider2D:
+--- !u!58 &2044850941279088993
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -131,7 +131,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -148,19 +148,9 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0, y: -0.19058794}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.30941206
 --- !u!95 &8592177407313788056
 Animator:
   serializedVersion: 5
@@ -194,12 +184,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ba35925ebe8034f9dba4d03e47cf89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 2
+  MoveSpeed: 1.5
   Enemy: {fileID: 1381222600379900710}
   Target: {fileID: 0}
-  HaveGun: 0
   EnemyType: Enemy2
+  HaveGun: 0
+  EnemyLife: 2
+  DeathEffect: {fileID: 516815663261954870, guid: 4e80441e72bf4a44595b94dc6140de69, type: 3}
   Saw: {fileID: 0}
+  Drop: {fileID: 0}
 --- !u!1 &5078283226383406245
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +202,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3406375675051535900}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -242,7 +235,7 @@ GameObject:
   - component: {fileID: 900285822337333691}
   - component: {fileID: 5417595634859116919}
   - component: {fileID: 5270512159692132176}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: EnemyGun
   m_TagString: EnemyGun
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
@@ -316,7 +309,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 10
 --- !u!1 &6869076643514612164
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +320,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4348336198282863872}
   - component: {fileID: 2264069673571782063}
-  m_Layer: 6
+  m_Layer: 9
   m_Name: Wand
   m_TagString: Untagged
   m_Icon: {fileID: 0}

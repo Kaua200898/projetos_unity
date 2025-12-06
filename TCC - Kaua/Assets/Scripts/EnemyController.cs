@@ -5,25 +5,34 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Velocidade")]
     public float MoveSpeed; 
+
     private Rigidbody2D rb;
     private Animator anim;
+    private SpriteRenderer sr;
 
+    [Header("Propriedades do Inimigo")]
     public Transform Enemy;
     public Transform Target;
+    public string EnemyType;
     public bool HaveGun;
 
-    public string EnemyType;
+    [Header("Propriedades da Vida")]
+    public int EnemyLife;
+    public GameObject DeathEffect;
 
+    [Header("Itens")]
     public GameObject Saw;
     private bool SawInvoked;
+
+    public GameObject Drop;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
-        MoveSpeed = Random.Range(2, 3);
+        sr = GetComponent<SpriteRenderer>();
 
         Enemy = this.gameObject.transform;
         Target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -84,8 +93,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Player" && EnemyType != "Enemy3" && !HaveGun)
         {
-            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
-            Debug.Log("Tomei dano");
+            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer(2);
         }
     }
 
@@ -93,7 +101,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "SimpleShot" && EnemyType != "Enemy3")
         {
-            Destroy(this.gameObject);
+            Damage();
         }
         else
         {
@@ -104,4 +112,31 @@ public class EnemyController : MonoBehaviour
         }
 
     }
+
+    void Damage()
+    {
+        EnemyLife--;
+        sr.color = Color.magenta;
+        Invoke("DamageGived", 0.1f);
+
+        if (EnemyLife <= 0)
+        {
+            Instantiate(DeathEffect, Enemy.position, Quaternion.identity);
+            Destroy(this.gameObject);
+
+            if (EnemyType == "Enemy4") { Instantiate(Drop, Enemy.position, Quaternion.identity); }
+            else if (Drop != null)
+            {
+                int RandomValue = Random.Range(1, 2);
+                if (RandomValue > 1) Instantiate(Drop, Enemy.position, Quaternion.identity);
+            }
+        }
+    }
+
+    void DamageGived()
+    {
+        sr.color = Color.white;
+    }
+
+    
 }

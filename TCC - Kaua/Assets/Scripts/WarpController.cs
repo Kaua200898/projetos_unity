@@ -8,7 +8,7 @@ public class WarpController : MonoBehaviour
     public GameObject Statue;
     public bool IsOpen = false;
 
-    public string StageName;
+    public GameObject NextStageManager;
 
     void Start()
     {
@@ -16,40 +16,50 @@ public class WarpController : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
 
         if (tag == "BlockedWarp")
         {
             if (Statue.GetComponentInParent<StatueController>().PlayerHasBeenDetected)
             {
-                GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-                if (IsOpen)
-                {
-                    Destroy(this.gameObject);
-                }
-
-                if (Enemies.Length == 0)
-                {
-                    IsOpen = true;
-                   
-                }
+                Invoke("CountEnemies", 0.5f);
             }
         }
-
-        if (tag == "Warp")
+        else if (tag == "Warp")
         {
             if (Statue.GetComponentInParent<StatueController>().PlayerHasBeenDetected)
             {
-                GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-                if (Enemies.Length == 0)
-                {
-                    IsOpen = true;
-
-                }
+                Invoke("OpenDoor", 0.5f);
             }
+        }
+    }
+
+    void CountEnemies()
+    {
+
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (IsOpen)
+        {
+            Destroy(this.gameObject);
+        }
+
+        if (Enemies.Length <= 0)
+        {
+            IsOpen = true;
+
+        }
+    }
+
+    void OpenDoor()
+    {
+        GameObject[] Enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (Enemies.Length <= 0)
+        {
+            IsOpen = true;
+
         }
     }
 
@@ -57,7 +67,7 @@ public class WarpController : MonoBehaviour
     {
         if (collision.tag == "Player" && tag == "Warp" && IsOpen == true)
         {
-            SceneManager.LoadScene(StageName);
+            NextStageManager.GetComponentInParent<NextStageManager>().NextStage();
         }
     }
 }

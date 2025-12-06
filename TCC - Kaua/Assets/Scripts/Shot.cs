@@ -27,7 +27,7 @@ public class Shot : MonoBehaviour
                 {
                     Destroy(this.gameObject);
                 }
-                collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer();
+                collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer(1);
             }
         
         }
@@ -40,5 +40,9 @@ public class Shot : MonoBehaviour
                 }
         }
 
+        if (collision.tag == "Solid" || collision.tag == "BlockedWarp")
+        {
+            Destroy(this.gameObject);
+        }
     }
 }

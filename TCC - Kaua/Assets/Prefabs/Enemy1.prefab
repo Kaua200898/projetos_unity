@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 347998999350348578}
   - component: {fileID: 5599937051210650191}
   - component: {fileID: 8994754936276400332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Enemy1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.0054683685, y: -0.15312004}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -159,7 +159,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.62266874, y: 0.5625148}
   m_EdgeRadius: 0
 --- !u!114 &347998999350348578
 MonoBehaviour:
@@ -176,9 +176,12 @@ MonoBehaviour:
   MoveSpeed: 2
   Enemy: {fileID: 8981343119786576408}
   Target: {fileID: 0}
-  HaveGun: 0
   EnemyType: Enemy1
+  HaveGun: 0
+  EnemyLife: 4
+  DeathEffect: {fileID: 516815663261954870, guid: 4e80441e72bf4a44595b94dc6140de69, type: 3}
   Saw: {fileID: 0}
+  Drop: {fileID: 4937312738331088272, guid: ab7f63d4ad40f3b4bb379379fe1d5df2, type: 3}
 --- !u!95 &5599937051210650191
 Animator:
   serializedVersion: 5
@@ -215,7 +218,7 @@ CircleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 384
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2

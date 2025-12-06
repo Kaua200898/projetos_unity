@@ -9,4 +9,19 @@ public class Menu : MonoBehaviour
     {
         SceneManager.LoadScene("Stage1");
     }
+
+    public void HowToPlay()
+    {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
+    public void Back()
+    {
+        SceneManager.LoadScene("TitleScreen");
+    }
 }

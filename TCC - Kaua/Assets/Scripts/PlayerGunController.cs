@@ -85,6 +85,11 @@ public class PlayerGunController : MonoBehaviour
             }
         }
     }
+
+    public void ChangeGun(string GunName)
+    {
+        GunType = GunName;
+    }
     void CD()
     {
         CanShoot = true;

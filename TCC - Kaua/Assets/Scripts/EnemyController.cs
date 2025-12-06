@@ -27,9 +27,12 @@ public class EnemyController : MonoBehaviour
     private bool SawInvoked;
 
     public GameObject Drop;
+    private int RandomValue;
 
     void Start()
     {
+        RandomValue = Random.Range(0, 2);
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
@@ -125,10 +128,11 @@ public class EnemyController : MonoBehaviour
             Destroy(this.gameObject);
 
             if (EnemyType == "Enemy4") { Instantiate(Drop, Enemy.position, Quaternion.identity); }
-            else if (Drop != null)
+            else if (EnemyType != "Enemy4" && Drop != null)
             {
-                int RandomValue = Random.Range(1, 2);
-                if (RandomValue > 1) Instantiate(Drop, Enemy.position, Quaternion.identity);
+                int Value = RandomValue;
+                Debug.Log(Value);
+                if (Value > 0) Instantiate(Drop, Enemy.position, Quaternion.identity);
             }
         }
     }

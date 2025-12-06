@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour
     private TrailRenderer tr;
     private CinemachineImpulseSource cis;
 
+    [Header("Arma")]
+    public GameObject Gun;
+
     private float MoveX, MoveY;
 
     [Header("Propriedades da Vida")]

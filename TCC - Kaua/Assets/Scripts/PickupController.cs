@@ -18,6 +18,12 @@ public class PickupController : MonoBehaviour
                 LifePickupPicked = true;
                 Destroy(this.gameObject);
             }
+
+            if (PickupType == "Uzi")
+            {
+                collision.GetComponentInParent<PlayerController>().Gun.GetComponentInParent<PlayerGunController>().ChangeGun("Uzi");
+                Destroy(this.gameObject);
+            }
         }
     }
 }

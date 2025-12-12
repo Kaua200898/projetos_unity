@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioSource DeathEffect;
     void Start()
     {
+        DeathEffect = GetComponent<AudioSource>();
+        DeathEffect.Play();
         Destroy(this.gameObject, 0.25f);
     }
 }

@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class WarpController : MonoBehaviour
 {
     public GameObject Statue;
     public bool IsOpen = false;
 
+    public AudioSource DoorOpeningSound;
+    private bool SoundPlayed = false;
+    private CinemachineImpulseSource cis;
+
     public GameObject NextStageManager;
 
     void Start()
     {
+        cis = GetComponent<CinemachineImpulseSource>();
+
         Statue = GameObject.FindGameObjectWithTag("Statue");
     }
 
@@ -42,6 +49,7 @@ public class WarpController : MonoBehaviour
 
         if (IsOpen)
         {
+            CameraShakeManager.instance.CameraShake(cis);
             Destroy(this.gameObject);
         }
 
@@ -58,8 +66,12 @@ public class WarpController : MonoBehaviour
 
         if (Enemies.Length <= 0)
         {
+            if (!SoundPlayed)
+            {
+                DoorOpeningSound.Play();
+            }
+            SoundPlayed = true;
             IsOpen = true;
-
         }
     }
 

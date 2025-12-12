@@ -19,6 +19,8 @@ public class GunController : MonoBehaviour
     public Transform FirePoint;
     public GameObject Shot;
 
+    public bool IsBook;
+
     void Start()
     {
         Target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -29,14 +31,21 @@ public class GunController : MonoBehaviour
     {
         TargetPosition = new Vector2(Target.transform.position.x, Target.transform.position.y);
 
-        if (PlayerOnRange) { Shooting(); }
+        if (PlayerOnRange) 
+        {
+            if (!IsBook) Shooting();
+            else Book();
+        }
     }
 
     private void FixedUpdate()
     {
-        GunDirection = TargetPosition - new Vector2(transform.position.x, transform.position.y);
-        Angle = Mathf.Atan2(GunDirection.y, GunDirection.x) * Mathf.Rad2Deg - 90f;
-        transform.rotation = Quaternion.Euler(0, 0, Angle);
+        if (!IsBook)
+        {
+            GunDirection = TargetPosition - new Vector2(transform.position.x, transform.position.y);
+            Angle = Mathf.Atan2(GunDirection.y, GunDirection.x) * Mathf.Rad2Deg - 90f;
+            transform.rotation = Quaternion.Euler(0, 0, Angle);
+        }
     }
 
     void Shooting()
@@ -53,6 +62,27 @@ public class GunController : MonoBehaviour
         if (CanShoot == true)
         {
             Instantiate(Shot, FirePoint.position, FirePoint.rotation);
+            CanShoot = false;
+        }
+    }
+
+    void Book()
+    {
+        GunCooldown -= Time.deltaTime;
+
+        if (GunCooldown <= 0 && CanShoot == false)
+        {
+            GunCooldown = 1;
+            CanShoot = true;
+        }
+
+        if (CanShoot == true)
+        {
+            Instantiate(Shot, FirePoint.position, Quaternion.Euler(0, 0, 45));
+            Instantiate(Shot, FirePoint.position, Quaternion.Euler(0, 0, -45));
+            Instantiate(Shot, FirePoint.position, Quaternion.Euler(0, 0, 135));
+            Instantiate(Shot, FirePoint.position, Quaternion.Euler(0, 0, -135));
+
             CanShoot = false;
         }
     }

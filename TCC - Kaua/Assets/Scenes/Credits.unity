@@ -181,7 +181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 80300b7b4d61cc4428f258e0f89f241f, type: 3}
     m_FontSize: 22
     m_FontStyle: 1
     m_BestFit: 0
@@ -839,7 +839,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 80300b7b4d61cc4428f258e0f89f241f, type: 3}
     m_FontSize: 46
     m_FontStyle: 1
     m_BestFit: 0
@@ -851,7 +851,17 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Made by:\nKau\xE3 Lima\n\nSuperGeeks:\nProf. Pedro\nProf. Gustavo"
+  m_Text: 'Made by:
+
+    Kaua Lima
+
+
+    SuperGeeks (LVL 3):
+
+    Prof. Gustavo
+
+    Prof.
+    Pedro'
 --- !u!222 &1553991448
 CanvasRenderer:
   m_ObjectHideFlags: 0

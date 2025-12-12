@@ -12,6 +12,8 @@ TagManager:
   - Spawner
   - EnemyGun
   - Solid
+  - PlayerGun
+  - GiantSpawner
   layers:
   - Default
   - TransparentFX

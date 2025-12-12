@@ -5,9 +5,12 @@ using UnityEngine;
 public class Shot : MonoBehaviour
 {
     public float ShotSpeed;
+    public AudioSource ShotSound;
     public float DestroyIn;
     void Start()
     {
+        ShotSound = GetComponent<AudioSource>();
+        if (ShotSound != null) ShotSound.Play();
         Destroy(this.gameObject, DestroyIn);
     }
 

@@ -7,6 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void StartGame()
     {
+        if (GameManager.instance != null) GameManager.instance.ResetPlayerStatus();
         SceneManager.LoadScene("Stage1");
     }
 

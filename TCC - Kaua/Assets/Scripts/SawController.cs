@@ -5,6 +5,7 @@ using UnityEngine;
 public class SawController : MonoBehaviour
 {
     public float SawSpeed;
+    public string SawBehaviour;
     private float MoveX;
     private float MoveY;
 
@@ -12,6 +13,8 @@ public class SawController : MonoBehaviour
     public bool CollidingUp;
     public bool CollidingLeft;
     public bool CollidingRight;
+
+    public AudioSource CollidingSound;
 
     public Transform[] Colliders;
     public float Raycast;
@@ -22,11 +25,26 @@ public class SawController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-        float[] MoveNumbers = {-1 , 1};
-        int RandomNumber = Random.Range(0, MoveNumbers.Length);
+        if (SawBehaviour == "Horizontal")
+        {
+            MoveX = 1;
+            MoveY = 0;
+        }
 
-        MoveX = MoveNumbers[RandomNumber];
-        MoveY = MoveNumbers[RandomNumber];
+        if (SawBehaviour == "Vertical")
+        {
+            MoveX = 0;
+            MoveY = 1;
+        }
+
+        if (SawBehaviour == "Random")
+        {
+            float[] MoveNumbers = { -1, 1 };
+            int RandomNumber = Random.Range(0, MoveNumbers.Length);
+
+            MoveX = MoveNumbers[RandomNumber];
+            MoveY = MoveNumbers[RandomNumber];
+        }
     }
 
     
@@ -49,10 +67,26 @@ public class SawController : MonoBehaviour
         CollidingLeft = Physics2D.OverlapCircle(Colliders[2].position, Raycast, SolidLayer);
         CollidingRight = Physics2D.OverlapCircle(Colliders[3].position, Raycast, SolidLayer);
 
-        if (CollidingDown) { MoveY = 1; }
-        if (CollidingUp) { MoveY = -1; }
-        if (CollidingLeft) { MoveX = 1; }
-        if (CollidingRight) { MoveX = -1; }
+        if (CollidingDown) 
+        {
+            MoveY = 1;
+            CollidingSound.Play();
+        }
+        if (CollidingUp) 
+        {
+            MoveY = -1;
+            CollidingSound.Play();
+        }
+        if (CollidingLeft) 
+        { 
+            MoveX = 1;
+            CollidingSound.Play();
+        }
+        if (CollidingRight) 
+        { 
+            MoveX = -1;
+            CollidingSound.Play();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

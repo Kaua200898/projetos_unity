@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
     [Header("Propriedades do Inimigo")]
     public Transform Enemy;
     public Transform Target;
+    public int DamageInPlayer;
     public string EnemyType;
     public bool HaveGun;
 
@@ -22,16 +23,22 @@ public class EnemyController : MonoBehaviour
     public int EnemyLife;
     public GameObject DeathEffect;
 
+
     [Header("Itens")]
+    public AudioSource TransformingSound;
     public GameObject Saw;
     private bool SawInvoked;
 
     public GameObject Drop;
     private int RandomValue;
 
+    [Header("Audio")]
+    public AudioSource HitSound;
+
+
     void Start()
     {
-        RandomValue = Random.Range(0, 2);
+        RandomValue = Random.Range(0, 10);
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
@@ -80,6 +87,7 @@ public class EnemyController : MonoBehaviour
         {
             MoveSpeed = 0;
             bool PlayerIsInRange = true;
+            TransformingSound.Play();
             anim.SetBool("PlayerDetected", PlayerIsInRange);
             Invoke("TurnIntoASaw", 1);
         }
@@ -96,7 +104,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Player" && EnemyType != "Enemy3" && !HaveGun)
         {
-            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer(2);
+            collision.GetComponentInParent<PlayerController>().GiveDamageInPlayer(DamageInPlayer);
         }
     }
 
@@ -119,21 +127,22 @@ public class EnemyController : MonoBehaviour
     void Damage()
     {
         EnemyLife--;
+        HitSound.Play();
         sr.color = Color.magenta;
         Invoke("DamageGived", 0.1f);
 
         if (EnemyLife <= 0)
         {
-            Instantiate(DeathEffect, Enemy.position, Quaternion.identity);
-            Destroy(this.gameObject);
 
-            if (EnemyType == "Enemy4") { Instantiate(Drop, Enemy.position, Quaternion.identity); }
+            if (EnemyType == "Enemy4" && Drop != null) { Instantiate(Drop, Enemy.position, Quaternion.identity); }
             else if (EnemyType != "Enemy4" && Drop != null)
             {
                 int Value = RandomValue;
-                Debug.Log(Value);
-                if (Value > 0) Instantiate(Drop, Enemy.position, Quaternion.identity);
+                if (Value > 7) Instantiate(Drop, Enemy.position, Quaternion.identity);
             }
+
+            Instantiate(DeathEffect, Enemy.position, Quaternion.identity);
+            Destroy(this.gameObject);
         }
     }
 

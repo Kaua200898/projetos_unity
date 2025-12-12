@@ -89,6 +89,7 @@ public class PlayerGunController : MonoBehaviour
     public void ChangeGun(string GunName)
     {
         GunType = GunName;
+        GameManager.instance.ChangeGunManager(GunName);
     }
     void CD()
     {

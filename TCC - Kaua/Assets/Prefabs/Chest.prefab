@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 3500342039495448742}
   - component: {fileID: 4998482437338659717}
   - component: {fileID: 7416520085326650140}
+  - component: {fileID: 4516341077767985196}
   m_Layer: 0
   m_Name: Chest
-  m_TagString: Untagged
+  m_TagString: Solid
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: -1837082957, guid: 047c2cc2619de5e4da876bb8f0b350fe, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -130,3 +131,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87742335, y: 0.8720939}
   m_EdgeRadius: 0
+--- !u!114 &4516341077767985196
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6296105535941071252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ae6e6e099c5ce49b85eda2b9ffa0d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Drop: {fileID: 4375993031874613094, guid: 2ebd89dbc6a10cf42b51f34e131cbb36, type: 3}
+  DestroyEffect: {fileID: 516815663261954870, guid: 4e80441e72bf4a44595b94dc6140de69, type: 3}
+  SpriteClosed: {fileID: -1837082957, guid: 047c2cc2619de5e4da876bb8f0b350fe, type: 3}
+  SpriteOpen: {fileID: 1876831790, guid: 047c2cc2619de5e4da876bb8f0b350fe, type: 3}

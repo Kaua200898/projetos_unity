@@ -8,14 +8,20 @@ public class StatueController : MonoBehaviour
     public bool PlayerHasBeenDetected = false;
     private Animator anim;
 
+    public AudioSource SpawnSound;
+
     public GameObject []Spawners;
+    public GameObject []GiantSpawners;
     public GameObject SpawnerBlink;
+    public GameObject GiantSpawnerBlink;
+
 
     void Start()
     {
         anim = GetComponent<Animator>();
 
         Spawners = GameObject.FindGameObjectsWithTag("Spawner");
+        GiantSpawners = GameObject.FindGameObjectsWithTag("GiantSpawner");
     }
 
     // Update is called once per frame
@@ -30,6 +36,7 @@ public class StatueController : MonoBehaviour
     {
         if (collision.tag == "Player" && PlayerHasBeenDetected == false)
         {
+            SpawnSound.Play();
             PlayerDetected = true;
             PlayerHasBeenDetected = true;
         }
@@ -42,6 +49,11 @@ public class StatueController : MonoBehaviour
             for(int i = 0; i < Spawners.Length; i++)
             {
                 Instantiate(SpawnerBlink, Spawners[i].transform.position, Quaternion.identity);
+            }
+
+            for (int i = 0; i < GiantSpawners.Length; i++)
+            {
+                Instantiate(GiantSpawnerBlink, GiantSpawners[i].transform.position, Quaternion.identity);
             }
 
 

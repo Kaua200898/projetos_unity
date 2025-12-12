@@ -9,13 +9,20 @@ public class NextStageManager : MonoBehaviour
     public string StageName;
     private bool ActiveTransition = false;
 
-    public Image Transition;
+    public Image TransitionStart;
+    public Image TransitionEnd;
 
-    // Update is called once per frame
+    void Start()
+    {
+        TransitionStart.fillAmount = 0;
+        TransitionEnd.fillAmount = 1;
+    }
     void Update()
     {
-        if (ActiveTransition) Transition.fillAmount += 0.01f;
-        if (Transition.fillAmount >= 1) SceneManager.LoadScene(StageName);
+        if (TransitionEnd.fillAmount > 0) TransitionEnd.fillAmount -= 0.05f;
+
+        if (ActiveTransition) TransitionStart.fillAmount += 0.05f;
+        if (TransitionStart.fillAmount >= 1) SceneManager.LoadScene(StageName);
     }
 
     public void NextStage()

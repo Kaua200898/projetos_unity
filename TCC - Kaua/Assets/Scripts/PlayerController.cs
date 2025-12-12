@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Cinemachine;
 using JetBrains.Annotations;
 
@@ -31,15 +32,20 @@ public class PlayerController : MonoBehaviour
 
     [Header("Propriedades da Vida")]
     public float Life;
-    public float MaxLife = 5;
+    public float MaxLife = 10;
     public Image LifeUI;
 
     [Header("Propriedades do Dano")]
     public float DamageCooldown;
     public bool CanTakeDamage = true;
+    public bool IsDead = false;
+
+    [Header("Audio")]
+    public AudioSource HitSound;
 
     void Start()
     {
+
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         tr = GetComponent<TrailRenderer>();
@@ -48,12 +54,18 @@ public class PlayerController : MonoBehaviour
         tr.emitting = false;
 
         Speed = MoveSpeed;
-        Life = MaxLife;
+
+        MaxLife = Life = GameManager.instance.PlayerMaxLife;
+        Life = GameManager.instance.PlayerLife;
+        Gun.GetComponentInParent<PlayerGunController>().GunType = GameManager.instance.PlayerGunType;
+
     }
 
 
     void Update()
     {
+        Gun = GameManager.instance.PlayerGun;
+
         Move();
         Animation();
         Damage();
@@ -74,7 +86,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = Speed * Direction.normalized;
 
         //Dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && Direction != Vector2.zero && InDash == false)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && Direction != Vector2.zero && InDash == false && IsDead == false)
         {
             InDash = true;
             CanTakeDamage = false;
@@ -145,6 +157,8 @@ public class PlayerController : MonoBehaviour
             ResetAnimationLayers();
             anim.SetLayerWeight(0, 1);
         }
+
+        anim.SetBool("IsDead", IsDead);
     }
 
     void HealthUIupdate()
@@ -186,9 +200,20 @@ public class PlayerController : MonoBehaviour
             DamageCooldown = 0;
         }
 
+        //Morte do Player
         if (Life <= 0)
         {
-            Destroy(this.gameObject);
+            IsDead = true;
+
+            if (IsDead == true)
+            {
+                GetComponent<SpriteRenderer>().color = Color.white;
+                Speed = 0;
+                MoveSpeed = 0;
+                DashSpeed = 0;
+                Destroy(Gun);
+                Invoke("GameOver", 1);
+            }
         }
     }
 
@@ -199,9 +224,16 @@ public class PlayerController : MonoBehaviour
         if (CanTakeDamage == true)
         {
             Life -= DamageAmount;
+            GameManager.instance.PlayerDamageManager(DamageAmount);
+            HitSound.Play(); //Tocar o som de dano
             CameraShakeManager.instance.CameraShake(cis); //Tremer a câmera
             CanTakeDamage = false;
             DamageCooldown = 2;
         }
+    }
+
+    void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 }
